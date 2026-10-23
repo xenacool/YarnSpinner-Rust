@@ -78,7 +78,7 @@ impl YarnFileSource {
             path = path.display()
         );
         let handles: Result<Vec<_>> =
-            glob(path.join("**/*.yarn").to_str().with_context(|| {
+            glob(anyhow::Context::with_context(path.join("**/*.yarn").to_str(), || {
                 format!(
                     "Failed to create string from path: {path}",
                     path = path.display(),
